@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surprise Unlocking ❤️</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#ff5f6d,#ffc371);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* floating hearts */
+.heart{
+  position:absolute;
+  bottom:-20px;
+  font-size:22px;
+  opacity:.6;
+  animation:float 6s linear infinite;
+}
+@keyframes float{
+  to{transform:translateY(-110vh);opacity:0}
+}
+
+/* card */
+.lock-container{
+  width:90%;
+  max-width:420px;
+  padding:35px 25px;
+  background:rgba(255,255,255,0.18);
+  backdrop-filter:blur(14px);
+  border-radius:28px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.3);
+  animation:pop .8s ease;
+}
+
+@keyframes pop{
+  from{transform:scale(.7);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+h1{
+  font-size:2rem;
+  margin-bottom:20px;
+}
+
+#countdown{
+  font-size:1.4rem;
+  letter-spacing:1px;
+}
+
+.lock-icon{
+  font-size:3rem;
+  margin-bottom:15px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- floating hearts -->
+<span class="heart" style="left:15%">❤️</span>
+<span class="heart" style="left:45%;animation-delay:2s">💖</span>
+<span class="heart" style="left:75%;animation-delay:4s">💕</span>
+
+<div class="lock-container">
+  <div class="lock-icon">🔒</div>
+  <h1>Surprise Unlocking</h1>
+  <div id="countdown">Loading...</div>
+</div>
+
+<script>
+/* 🎂 SET DATE & TIME */
+const unlockTime = new Date("2025-12-14 10:00:00").getTime();
+
+const timer = setInterval(()=>{
+  const now = new Date().getTime();
+  const diff = unlockTime - now;
+
+  if(diff <= 0){
+    clearInterval(timer);
+    window.location.href = "note.html";
+    return;
+  }
+
+  const d = Math.floor(diff / (1000*60*60*24));
+  const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+  const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+  const s = Math.floor((diff % (1000*60)) / 1000);
+
+  document.getElementById("countdown").innerHTML =
+    `⏳ ${d}d : ${h}h : ${m}m : ${s}s`;
+},1000);
+</script>
+
+</body>
+</html>
