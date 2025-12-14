@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Open 🎀</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#ff5f6d,#ffc371);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  overflow:hidden;
+}
+
+/* floating hearts */
+.heart{
+  position:absolute;
+  bottom:-20px;
+  color:rgba(255,255,255,0.6);
+  font-size:20px;
+  animation:float 6s linear infinite;
+}
+@keyframes float{
+  to{transform:translateY(-110vh);opacity:0}
+}
+
+/* note box */
+.note-box{
+  width:90%;
+  max-width:420px;
+  padding:32px 26px;
+  background:rgba(255,255,255,0.18);
+  backdrop-filter:blur(14px);
+  border-radius:26px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.25);
+  animation:pop 0.8s ease;
+  text-align:center;
+}
+
+@keyframes pop{
+  from{transform:scale(0.7);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+.note-title{
+  font-size:1.7rem;
+  margin-bottom:18px;
+  font-weight:600;
+}
+
+#noteText{
+  font-size:1.15rem;
+  min-height:90px;
+  line-height:1.7;
+}
+
+/* button */
+button{
+  margin-top:28px;
+  padding:13px 32px;
+  border:none;
+  border-radius:35px;
+  background:white;
+  color:#ff5f6d;
+  font-size:1rem;
+  cursor:pointer;
+  display:none;
+  box-shadow:0 8px 18px rgba(0,0,0,0.2);
+  transition:transform .2s;
+}
+button:hover{
+  transform:scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<!-- floating hearts -->
+<span class="heart" style="left:10%">❤️</span>
+<span class="heart" style="left:40%;animation-delay:2s">💖</span>
+<span class="heart" style="left:70%;animation-delay:4s">💕</span>
+
+<div class="note-box">
+  <div class="note-title">Before You Begin 💌</div>
+  <div id="noteText"></div>
+  <button id="continueBtn" onclick="goNext()">Open Surprise 🎁</button>
+</div>
+
+<script>
+/* 🔤 NOTES CONTENT */
+const notes = [
+  "🎀 Tap on the ribbon to open the page",
+  "🖼️ Click on the images and tap on the “Show Message” button",
+  "To open the next image, click on the ❌ symbol at the top-right corner"
+];
+
+/* ⚙️ SETTINGS */
+let i = 0, j = 0;
+const typingSpeed = 55;
+const gapTime = 1000; // ⏳ 10 seconds pause
+
+const noteText = document.getElementById("noteText");
+const btn = document.getElementById("continueBtn");
+
+/* ✍️ TYPE FUNCTION */
+function typeNote(){
+  if (j < notes[i].length) {
+    noteText.innerHTML += notes[i].charAt(j++);
+    setTimeout(typeNote, typingSpeed);
+  } else {
+    // ⏸️ WAIT 10 SECONDS BEFORE NEXT MESSAGE
+    setTimeout(() => {
+      j = 0;
+      i++;
+      if (i < notes.length) {
+        noteText.innerHTML = "";
+        typeNote();
+      } else {
+        btn.style.display = "inline-block";
+      }
+    }, gapTime);
+  }
+}
+
+typeNote();
+
+/* 👉 NEXT PAGE */
+function goNext(){
+  window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
